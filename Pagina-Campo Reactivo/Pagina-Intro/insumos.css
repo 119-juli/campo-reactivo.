@@ -1,0 +1,127 @@
+html {
+    box-sizing: border-box;
+    font-size: 12pt;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    position: relative;
+    padding: 50px;
+    background-color: #f9f9f9;
+}
+
+header nav {
+    width: 100%;
+}
+
+header nav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+header nav ul li {
+    list-style: none;
+    margin-right: 20px;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+header nav ul li img {
+    width: 100px;
+    height: 100px;
+}
+
+h2 {
+    margin-top: 30px;
+    font-size: 1.4rem;
+    color: #333;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+form input[type="text"],
+form input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: #1f6541;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0fed7e;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-size: 1.1rem;
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+td img {
+    width: 100px;
+    height: 100px;
+    display: block;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+button {
+    margin: 2px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+button:nth-child(2) {
+    background-color: #dc3545;
+}
+
+button:nth-child(2):hover {
+    background-color: #c82333;
+}

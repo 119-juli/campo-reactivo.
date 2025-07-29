@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(Media/image/fisica-quimica.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 100px;
+    flex-wrap: wrap;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 30px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+}
+
+header nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header nav ul li {
+    list-style: none;
+    margin-right: 20px;
+    font-size: 15pt;
+    font-weight: bold;
+}
+
+header nav ul li img {
+    width: 80px;
+    height: 80px;
+}
+
+.form-box {
+    width: 350px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 20px;
+    margin: 20px;
+    box-shadow: 0 4px 20px rgba(255,255,255,0.2);
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 15px 0 5px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #fff;
+    color: white;
+    font-size: 16px;
+    padding: 8px 0;
+    margin-bottom: 15px;
+}
+
+input::placeholder {
+    color: #ccc;
+}
+
+.button {
+    display: block;
+    width: 100%;
+    background: #76c893;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    margin: 20px 0;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.button:hover {
+    background: #4ea972;
+}
+
+a {
+    display: block;
+    text-align: center;
+    color: #ccc;
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+a:hover {
+    color: #fff;
+}

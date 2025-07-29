@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventario Laboratorio Física</title>
+    <link rel="stylesheet" href="insumosfisica.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><img src="Media/image/Logo.png" alt="Logo"></li>
+            <li><a href="inicio_perfil.html">Inicio</a></li>
+            <li><a href="insumos.html">Inventario-Laboratorio Química</a></li>
+            <li><a href="insumosfisica.html">Inventario-Laboratorio Física</a></li>
+            <li><a href="buzon.html">Sugerencias</a></li>
+            <li><a href="contactanos.html">Contáctanos</a></li>
+        </ul>
+    </nav>
+</header>
+
+<h1>Inventario-Laboratorio Física</h1>
+
+<div class="form-section">
+    <h2>Agregar / Editar Material</h2>
+    <form id="materialForm">
+        <input type="hidden" id="editIndex" value="">
+        <label>
+            Material:
+            <input type="text" id="materialNombre" required>
+        </label>
+        <label>
+            Descripción:
+            <input type="text" id="materialDescripcion">
+        </label>
+        <label>
+            Cantidad:
+            <input type="number" id="materialCantidad" required min="1">
+        </label>
+        <label>
+            Imagen (URL):
+            <input type="text" id="materialImagen" placeholder="Pagina-Intro/Media/image/nombre.jpg" required>
+        </label>
+        <label>
+            Estado:
+            <select id="materialEstado" required>
+                <option value="Bueno">Bueno</option>
+                <option value="Obsoleto">Obsoleto</option>
+                <option value="Malo">Malo</option>
+            </select>
+        </label>
+        <button type="submit" class="btn-guardar">Guardar</button>
+    </form>
+</div>
+
+<div class="inventario-section">
+    <h2>Inventario</h2>
+    <table id="inventarioTabla">
+        <thead>
+            <tr>
+                <th>Material</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Imagen</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<script>
+    // Lista completa de materiales del laboratorio
+    const materiales = [
+        { nombre: "Tubo de ensayo de vidrio", descripcion: "Tubo de ensayo estándar de vidrio", estado: "Bueno", cantidad: 4, imagen: "Media/image/1.Tubo de ensayo de vidrio..jpg" },
+        { nombre: "Gradilla de madera. 18 puestos", descripcion: "Gradilla para tubos de ensayo con capacidad para 18 unidades", estado: "Bueno", cantidad: 1, imagen: "Media/image/2. Gradilla de madera. 18 puestos.jpg" },
+        { nombre: "Beaker de vidrio. Marca: SCHOTT DURAN. Volumen de 400mL", descripcion: "Vaso de precipitados de vidrio resistente", estado: "Bueno", cantidad: 1, imagen: "Media/image/3. Beaker de vidrio. Marca SCHOTT DURAN. Volumen de 400mL.jpg" },
+        { nombre: "Caja de petri de vidrio", descripcion: "Caja de petri para cultivos", estado: "Bueno", cantidad: 1, imagen: "Media/image/4. Caja de petri de vidrio.jpg" },
+        { nombre: "Portapesas de plástico para balanza con tres cadenas cada uno", descripcion: "Portapesas para experimentos de física", estado: "Bueno", cantidad: 2, imagen: "Media/image/5. Portapesas de plástico para balanza con tres cadenas cada uno.jpg" },
+        { nombre: "Balón de fondo redondo de vidrio. Marca: ILMABOR. Volumen de 250mL", descripcion: "Balón de vidrio para destilación", estado: "Bueno", cantidad: 1, imagen: "Media/image/6. Balón de fondo redondo de vidrio. Marca ILMABOR. Volumen de 250mL.jpg" },
+        { nombre: "Base metálica de soporte universal. Marca: Physics", descripcion: "Base para montajes experimentales", estado: "Bueno", cantidad: 1, imagen: "Media/image/7. Base metálica de soporte universal. Marca Physics.jpg" },
+        { nombre: "Nuez metálica con aro para soporte universal", descripcion: "Accesorio para soporte universal", estado: "Bueno", cantidad: 1, imagen: "Media/image/8. Nuez metálica con aro para soporte universal.jpg" },
+        { nombre: "Pinza metálica para soporte universal", descripcion: "Pinza para sujetar materiales", estado: "Bueno", cantidad: 1, imagen: "Media/image/9. Pinza metálica para soporte universal.jpg" },
+        { nombre: "Nuez metálica sujetadora para soporte universal", descripcion: "Accesorio para soporte universal", estado: "Bueno", cantidad: 1, imagen: "Media/image/10. Nuez metálica sujetadora para soporte universal.jpg" },
+        { nombre: "Nuez doble metálica para soporte universal", descripcion: "Accesorio para soporte universal", estado: "Bueno", cantidad: 1, imagen: "Media/image/11. Nuez doble metálica para soporte universal.jpg" },
+        { nombre: "Tapones de caucho, diferentes diámetros", descripcion: "Tapones para material de vidrio", estado: "Bueno", cantidad: 3, imagen: "Media/image/12. Tapones de caucho, diferentes diámetros.jpg" },
+        { nombre: "Masas metálicas de 100g, 50g, 20g, 5g, 2g y 1g. Una por cada valor", descripcion: "Juego de masas para experimentos", estado: "Bueno", cantidad: 6, imagen: "Media/image/13. Masas metálicas de 100g, 50g, 20g, 5g, 2g y 1g. Una por cada valor.jpg" },
+        { nombre: "Plomada metálica", descripcion: "Instrumento para verificar verticalidad", estado: "Bueno", cantidad: 1, imagen: "Media/image/14. Plomada metálica.jpg" },
+        { nombre: "Dinamómetro metálico. Marca: Physics. Rango: ON a 2N, Resolución 0.25N", descripcion: "Medidor de fuerza", estado: "Bueno", cantidad: 1, imagen: "Media/image/15. Dinamómetro metálico. Marca Physics. Rango 0N a 2N, Resolución 0.25N.jpg" },
+        { nombre: "Escobilla de laboratorio", descripcion: "Para limpieza de material", estado: "Bueno", cantidad: 1, imagen: "Media/image/16. Escobilla de laboratorio..jpg" },
+        { nombre: "Malla metálica cuadrada para calentamiento", descripcion: "Para distribución uniforme de calor", estado: "Bueno", cantidad: 1, imagen: "Media/image/17. Malla metálica cuadrada para calentamiento.jpg" },
+        { nombre: "Lupa de material metálico cóncavo y convexo. Mango y cubimiento plástico", descripcion: "Instrumento óptico", estado: "Bueno", cantidad: 1, imagen: "Media/image/18. Lupa de material metálico cóncavo y convexo. Mango y cubimiento plástico 1.jpg" },
+        { nombre: "Tubo de vidrio en forma de L", descripcion: "Para experimentos específicos", estado: "Bueno", cantidad: 1, imagen: "Media/image/19. Tubo de vidrio en forma de L.jpg" },
+        { nombre: "Base y soporte metálico. Marca: Physics", descripcion: "Soporte para experimentos", estado: "Bueno", cantidad: 1, imagen: "Media/image/20. Base y soporte metálico. Marca Physics.jpg" }
+    ];
+
+    const form = document.getElementById('materialForm');
+    const tabla = document.getElementById('inventarioTabla').querySelector('tbody');
+
+    function renderTabla() {
+        tabla.innerHTML = '';
+        materiales.forEach((mat, index) => {
+            const fila = document.createElement('tr');
+            
+            // Determinar clase CSS según el estado
+            const estadoClass = `estado-${mat.estado.toLowerCase()}`;
+            
+            fila.innerHTML = `
+                <td>${mat.nombre}</td>
+                <td>${mat.descripcion || ''}</td>
+                <td>${mat.cantidad}</td>
+                <td><img src="${mat.imagen}" alt="${mat.nombre}" onerror="this.style.display='none'"></td>
+                <td>
+                    <button onclick="editar(${index})" class="btn-editar">Editar</button>
+                    <button onclick="eliminar(${index})" class="btn-eliminar">Eliminar</button>
+                </td>
+            `;
+            
+            tabla.appendChild(fila);
+        });
+    }
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const material = {
+            nombre: document.getElementById('materialNombre').value,
+            descripcion: document.getElementById('materialDescripcion').value,
+            estado: document.getElementById('materialEstado').value,
+            cantidad: parseInt(document.getElementById('materialCantidad').value),
+            imagen: document.getElementById('materialImagen').value
+        };
+        
+        const editIndex = document.getElementById('editIndex').value;
+        
+        if (editIndex === '') {
+            materiales.push(material);
+        } else {
+            materiales[editIndex] = material;
+            document.getElementById('editIndex').value = '';
+        }
+        
+        form.reset();
+        renderTabla();
+    });
+
+    function editar(index) {
+        const mat = materiales[index];
+        document.getElementById('materialNombre').value = mat.nombre;
+        document.getElementById('materialDescripcion').value = mat.descripcion || '';
+        document.getElementById('materialEstado').value = mat.estado;
+        document.getElementById('materialCantidad').value = mat.cantidad;
+        document.getElementById('materialImagen').value = mat.imagen;
+        document.getElementById('editIndex').value = index;
+    }
+
+    function eliminar(index) {
+        if (confirm('¿Seguro que deseas eliminar este material?')) {
+            materiales.splice(index, 1);
+            renderTabla();
+        }
+    }
+
+    // Mostrar la tabla al cargar la página
+    renderTabla();
+</script>
+</body>
+</html>

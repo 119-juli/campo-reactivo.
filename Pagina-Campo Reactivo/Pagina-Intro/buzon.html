@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buzón de Sugerencias</title>
+  <link rel="stylesheet" href="buzon.css" />
+</head>
+<body>
+
+  <div class="fondo-burbujas"></div>
+
+  <div class="buzon-container">
+    <img src="Media/image/Logo.png" alt="química" class="icono-quimica">
+    <h2>Buzón de Sugerencias</h2>
+    <form id="sugerenciaForm">
+      <input type="text" id="nombre" placeholder="Tu nombre" required>
+      <input type="email" id="correo" placeholder="Tu correo electrónico" required>
+      <textarea id="sugerencia" rows="4" placeholder="Escribe tu sugerencia..." required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+
+    <div class="sugerencias">
+      <h3>Sugerencias Recibidas</h3>
+      <ul id="listaSugerencias"></ul>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("sugerenciaForm");
+    const lista = document.getElementById("listaSugerencias");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const nombre = document.getElementById("nombre").value.trim();
+      const correo = document.getElementById("correo").value.trim();
+      const sugerencia = document.getElementById("sugerencia").value.trim();
+
+      if (nombre && correo && sugerencia) {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${nombre}</strong> (${correo}):<br>${sugerencia}`;
+        lista.appendChild(li);
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
